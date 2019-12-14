@@ -41,6 +41,7 @@ namespace WebBanHang.Controllers
             ViewBag.quantity = cart.Sum(item => item.Quantity);
             return View();
         }
+
         //public async Task<IActionResult> Details(int? id, int? id2, int page = 1)
         //{
         //    var model = _context.loais.ToList();
@@ -120,24 +121,24 @@ namespace WebBanHang.Controllers
             return -1;
         }
 
-        //public JsonResult Update(string cartModel)
+        //public jsonresult update(string cartmodel)
         //{
-        //    var jsonCart = JsonConvert.DeserializeObject<List<Item>>(cartModel);
-        //    var sessioncart = SessionHelper.Get<List<Item>>(HttpContext.Session, "cart");
+        //    var jsoncart = jsonconvert.deserializeobject<list<item>>(cartmodel);
+        //    var sessioncart = sessionhelper.get<list<item>>(httpcontext.session, "cart");
         //    foreach (var item in sessioncart)
         //    {
-        //        var jsonItem = jsonCart.Where(x => x.Product.MaHH == item.Product.MaHH).First();
-        //        if (jsonItem != null)
+        //        var jsonitem = jsoncart.where(x => x.product.mahh == item.product.mahh).first();
+        //        if (jsonitem != null)
         //        {
-        //            item.Quantity = jsonItem.Quantity;
+        //          item.quantity = jsonitem.quantity;
         //        }
 
         //    }
-        //    SessionHelper.Set(HttpContext.Session, "cart", sessioncart);
-        //    return Json(new
+        //    sessionhelper.set(httpcontext.session, "cart", sessioncart);
+        //    return json(new
         //    {
         //        status = true
-        //    });
+        //   });
         //}
         [HttpPost("a")]
         public IActionResult Update(IFormCollection fc)
