@@ -13,7 +13,7 @@ namespace WebBanHang.Models
         [Key]
         public int MaHH { get; set; }
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string TenHH { get; set; }
         public string Hinh { get; set; }
         public string MoTa { get; set; }

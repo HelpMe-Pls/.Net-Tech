@@ -15,7 +15,7 @@ namespace WebBanHang.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -83,7 +83,7 @@ namespace WebBanHang.Migrations
 
                     b.Property<string>("TenHH")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(100);
 
                     b.HasKey("MaHH");
 
