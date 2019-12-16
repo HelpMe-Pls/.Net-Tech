@@ -2,7 +2,10 @@
 @model IEnumerable<WebBanHang.Models.Loai>
 
 
-
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Components/_AdminPage.cshtml";
+}
 
 
 <p>
@@ -12,7 +15,7 @@
     <thead>
         <tr>
             <th>
-               Ten loai
+                Ten loai
             </th>
             <th></th>
         </tr>
