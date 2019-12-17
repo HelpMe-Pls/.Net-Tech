@@ -57,6 +57,10 @@ namespace WebBanHang.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Taikhoan()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View(await _context.TaiKhoans.ToListAsync());
         }
         [HttpPost, AllowAnonymous]

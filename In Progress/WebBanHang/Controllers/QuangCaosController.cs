@@ -21,6 +21,10 @@ namespace WebBanHang.Controllers
         // GET: QuangCaos
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View(await _context.QuangCao.ToListAsync());
         }
 
@@ -45,6 +49,10 @@ namespace WebBanHang.Controllers
         // GET: QuangCaos/Create
         public IActionResult Create()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View();
         }
 
