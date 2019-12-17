@@ -45,7 +45,13 @@
                                 </select>
                             </div>
                             <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-                            <div class="well"><label>Quantity: </label> <input class="form-inline quantity" type="text" value="1"><a asp-action="buy" asp-controller="cart" class="btn btn-2 ">ADD</a></div>
+                            <div class="well">
+                                <label>Quantity: </label> 
+                                <form asp-action="buydetail" asp-controller="cart">
+                                    <input class="form-inline quantity" name="soluong" type="text" value="1">
+                                    <button type="submit" class="btn btn-2">ADD</button>
+                                </form>
+                            </div>
                             <div class="share well">
                                 <strong style="margin-right: 13px;">Share :</strong>
                                 <a href="#" class="share-btn" target="_blank">
@@ -183,13 +189,13 @@
                 <div class="widget wid-brand">
                     <div class="heading"><h4>BRAND</h4></div>
                     <div class="content">
-                        <label class="checkbox"><input type="checkbox" name="brand">Nokia</label>
-                        <label class="checkbox"><input type="checkbox" name="brand">Samsung</label>
-                        <label class="checkbox"><input type="checkbox" name="brand">Iphone</label>
-                        <label class="checkbox"><input type="checkbox" name="brand">HTC</label>
-                        <label class="checkbox"><input type="checkbox" name="brand">Oppo</label>
-                        <label class="checkbox"><input type="checkbox" name="brand">Kings</label>
-                        <label class="checkbox"><input type="checkbox" name="brand">Zumba</label>
+                        <label class="checkbox"><input type="checkbox" name="brand">Apple</label>
+                        <label class="checkbox"><input type="checkbox" name="brand">Dell</label>
+                        <label class="checkbox"><input type="checkbox" name="brand">Asus</label>
+                        <label class="checkbox"><input type="checkbox" name="brand">Lenovo</label>
+                        <label class="checkbox"><input type="checkbox" name="brand">HP</label>
+                        <label class="checkbox"><input type="checkbox" name="brand">MSI</label>
+                        <label class="checkbox"><input type="checkbox" name="brand">Acer</label>
                     </div>
                 </div>
                 <div class="widget wid-product">

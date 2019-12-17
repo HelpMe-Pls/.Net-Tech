@@ -98,6 +98,35 @@ namespace WebBanHang.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("buydetail/{id}")]
+        public IActionResult BuyDetail(int id, int soluong)
+        {
+
+            if (SessionHelper.Get<List<Item>>(HttpContext.Session, "cart") == null)
+            {
+                List<Item> cart = new List<Item>();
+                cart.Add(new Item { Product = _context.HangHoas.Find(id), Quantity = soluong });
+
+                SessionHelper.Set(HttpContext.Session, "cart", cart);
+            }
+            else
+            {
+                List<Item> cart = SessionHelper.Get<List<Item>>(HttpContext.Session, "cart");
+                int index = Exists(id);
+                if (index != -1)
+                {
+                    cart[index].Quantity = cart[index].Quantity + soluong;
+                }
+                else
+                {
+                    cart.Add(new Item { Product = _context.HangHoas.Find(id), Quantity = soluong });
+                }
+                SessionHelper.Set(HttpContext.Session, "cart", cart);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         [Route("remove/{id}")]
         public IActionResult Remove(int id)
         {
