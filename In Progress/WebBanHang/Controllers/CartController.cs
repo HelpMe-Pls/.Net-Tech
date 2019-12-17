@@ -22,6 +22,17 @@ namespace WebBanHang.Controllers
         {
             _context = context;
         }
+        [Route("showsp")]
+        public async Task<IActionResult> Showsp(int? id)
+        {
+            var model = _context.loais.ToList();
+            ViewBag.model = model;
+
+            var loai = _context.HangHoas
+                .Where(m => m.MaLoai == id).AsNoTracking().OrderBy(p => p.TenHH);
+
+            return View(loai);
+        }
         [Route("index")]
         public async Task<IActionResult> Index()
         {
@@ -284,5 +295,6 @@ namespace WebBanHang.Controllers
         {
             return View(await _context.loais.ToListAsync());
         }
+
     }
 }
