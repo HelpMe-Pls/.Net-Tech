@@ -26,6 +26,10 @@ namespace WebBanHang.Controllers
         // GET: HangHoas
         public async Task<IActionResult> Index(int page=1)
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             var query = _context.HangHoas.AsNoTracking().OrderBy(p => p.MaHH);
             var model = await PagingList.CreateAsync(query, 10, page);
             return View(model);
@@ -55,6 +59,10 @@ namespace WebBanHang.Controllers
         // GET: HangHoas/Create
         public IActionResult Create()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             ViewData["MaLoai"] = new SelectList(_context.loais, "MaLoai", "TenLoai");
             return View();
         }

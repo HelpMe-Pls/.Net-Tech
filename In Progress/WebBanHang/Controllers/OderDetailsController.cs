@@ -21,6 +21,10 @@ namespace WebBanHang.Controllers
         // GET: OderDetails
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             var model = _context.OderDetails.ToList();
             ViewBag.model = model;
             return View();
@@ -47,6 +51,10 @@ namespace WebBanHang.Controllers
         // GET: OderDetails/Create
         public IActionResult Create()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View();
         }
 
