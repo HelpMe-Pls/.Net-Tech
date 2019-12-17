@@ -46,14 +46,15 @@
             <div class="row">
                 <div class="col-xs-6">
                     <select class="language">
-                        <option value="English" selected>English</option>
+                        <option value="English" selected>Vietnamese</option>
                         <option value="France">France</option>
                         <option value="Germany">Germany</option>
+                        <option value="English">English</option>
                     </select>
                     <select class="currency">
-                        <option value="USD" selected>USD</option>
+                        <option value="VND" selected>VND</option>
                         <option value="EUR">EUR</option>
-                        <option value="DDD">DDD</option>
+                        <option value="USD">USD</option>
                     </select>
                 </div>
                 <div class="col-xs-6">
@@ -63,12 +64,12 @@
                             {
                                 <li>
                                     <a asp-controller="TrangChus" asp-action="Create">
-                                        <span class="glyphicon glyphicon-user"></span> Sign Up
+                                        <span class="glyphicon glyphicon-user"></span> Đăng ký
                                     </a>
                                 </li>
                                 <li>
                                     <a asp-controller="TrangChus" asp-action="Login">
-                                        <span class="glyphicon glyphicon-log-in"></span> Login
+                                        <span class="glyphicon glyphicon-log-in"></span> Đăng nhập
                                     </a>
                                 </li>
                             }
@@ -76,13 +77,13 @@
                             {
                                 <li>
                                     <a asp-controller="AdMin" asp-action="Profile">
-                                        Xin chào
+                                        Xin chào, 
                                         <b>@User.Identity.Name</b>
                                     </a>
                                 </li>
                                 <li>
                                     <a asp-controller="TrangChus" asp-action="Logout">
-                                        <span class="glyphicon glyphicon-log-in"></span> Logout
+                                        <span class="glyphicon glyphicon-log-in"></span> Đăng xuất
                                     </a>
                                 </li>
                             }
@@ -96,7 +97,7 @@
     <header class="container">
         <div class="row">
             <div class="col-md-4">
-                <div id="logo"><img src="~/images/logo.png" /></div>
+                <div id="logo"><img style="height:60px" src="~/images/laptopshop.jpg" /></div>
             </div>
             <div class="col-md-4">
                 <form class="form-search">
@@ -105,7 +106,7 @@
                 </form>
             </div>
             <div class="col-md-4">
-                <div id="cart"><a class="btn btn-1" asp-action="index" asp-controller="cart"><span class="glyphicon glyphicon-shopping-cart"></span>CART </a></div>
+                <div id="cart"><a class="btn btn-1" asp-action="index" asp-controller="cart"><span class="glyphicon glyphicon-shopping-cart"></span>Giỏ hàng </a></div>
             </div>
         </div>
     </header>
@@ -118,9 +119,9 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-action="Index">Home</a></li>
+                    <li><a asp-action="Index">Trang chủ</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PRODUCT</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản phẩm</a>
                         <div class="dropdown-menu">
                             <div class="dropdown-inner">
                                 <ul class="list-unstyled">
@@ -140,7 +141,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cửa hàng</a>
                         <div class="dropdown-menu">
                             <div class="dropdown-inner">
                                 <ul class="list-unstyled">
@@ -154,11 +155,11 @@
                         </div>
                     </li>
                     <li>
-                        <a asp-action="showbaiviet" asp-controller="TrangChus">NEWS</a>
+                        <a asp-action="showbaiviet" asp-controller="TrangChus">Tin tức - Sự kiện</a>
 
 
                     </li>
-                    <li><a asp-action="Contact" asp-controller="TrangChus">CONTACT</a></li>
+                    <li><a asp-action="Contact" asp-controller="TrangChus">Liên hệ</a></li>
                 </ul>
             </div>
         </div>

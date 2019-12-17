@@ -7,7 +7,7 @@
 
 <div id="page-content" class="single-page">
     <div class="container">
-        <h2>Cart Item</h2>
+        <h2>Giỏ hàng</h2>
         @using (Html.BeginForm("Update", "Cart", FormMethod.Post))
         {
           
@@ -31,43 +31,43 @@
                                     <div class="price">$@item.Product.DonGia<span>@item.Product.GiamGia%</span></div>
                                     <label>Quantity: </label> <input name="quantity" class="form-inline quantity" type="text" value="@item.Quantity" asp-route-id="@item.Product.MaHH">
                                     <hr>
-                                    <a asp-action="remove" asp-controller="cart" asp-route-id="@item.Product.MaHH" class="btn btn-default pull-right">REMOVE</a>
+                                    <a asp-action="remove" asp-controller="cart" asp-route-id="@item.Product.MaHH" class="btn btn-default pull-right">Bỏ</a>
                                 </div>
                             </div>
                             <div class="clear"></div>
                         </div>
                     </div>
                 }
-            <input type="submit" value="Update Shopping Cart" />
+            <input type="submit" value="Cập nhật giỏ hàng" />
         }
             
 
             <div class="col-md-4 col-md-offset-8 ">
-                <center><a asp-action="Index" asp-controller="TrangChus" class="btn btn-1">Continue To Shopping</a></center>
+                <center><a asp-action="Index" asp-controller="TrangChus" class="btn btn-1">Tiếp tục mua sắm</a></center>
             </div>
         </div>
         <div class="row">
             <div class="pricedetails">
                 <div class="col-md-4 col-md-offset-8">
                     <table>
-                        <h6>Price Details</h6>
+                        <h6>Chi tiết giá tiền</h6>
                         <tr>
-                            <td>Total</td>
+                            <td>Tổng tiền</td>
                             <td>
-                               $@ViewBag.gia
+                                @ViewBag.gia đ
                             </td>
                         </tr>
                         <tr>
-                            <td>Discount</td>
-                            <td>$@ViewBag.giamgia</td>
+                            <td>Giảm giá</td>
+                            <td>@ViewBag.giamgia đ</td>
                         </tr>
                         <tr>
-                            <td>Delivery Charges</td>
+                            <td>Phí vận chuyển</td>
                             <td>-----</td>
                         </tr>
                         <tr style="border-top: 1px solid #333">
-                            <td><h5>TOTAL</h5></td>
-                            <td>$@ViewBag.total</td>
+                            <td><h5>TỔNG TIỀN</h5></td>
+                            <td>@ViewBag.total đ</td>
                         </tr>
                     </table>
 
@@ -77,7 +77,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-8 ">
-                    <center><a asp-action="ThanhToan" class="btn btn-1">Check Out</a></center>
+                    <center><a asp-action="ThanhToan" class="btn btn-1">Thanh toán</a></center>
                 </div>
             </div>
         </div>
