@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using Microsoft.AspNetCore.Mvc;
 using WebBanHang.Models;
 
@@ -38,6 +39,26 @@ namespace WebBanHang.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("/sitemap.xml")]
+        public void SitemapXml()
+        {
+            string host = Request.Scheme + "://" + Request.Host;
+
+            Response.ContentType = "application/xml";
+
+            using (var xml = XmlWriter.Create(Response.Body, new XmlWriterSettings { Indent = true }))
+            {
+                xml.WriteStartDocument();
+                xml.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+                xml.WriteStartElement("url");
+                xml.WriteElementString("loc", host);
+                xml.WriteEndElement();
+
+                xml.WriteEndElement();
+            }
         }
     }
 }
