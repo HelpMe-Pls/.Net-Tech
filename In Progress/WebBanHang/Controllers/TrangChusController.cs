@@ -243,6 +243,8 @@ namespace WebBanHang.Controllers
         [HttpGet, AllowAnonymous]
         public IActionResult Login()
         {
+            var model = _context.loais.ToList();
+            ViewBag.model = model;
             ViewBag.ReturnUrl = HttpContext.Request.Query["ReturnUrl"].ToString();
             return View();
         }
@@ -291,6 +293,8 @@ namespace WebBanHang.Controllers
         }
         public IActionResult Create()
         {
+            var model = _context.loais.ToList();
+            ViewBag.model = model;
             return View();
         }
 
