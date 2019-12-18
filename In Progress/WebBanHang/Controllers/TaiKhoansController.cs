@@ -63,8 +63,17 @@ namespace WebBanHang.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaTK,TenDangNhap,MatKhau")] TaiKhoan taiKhoan)
         {
-            TaiKhoan tk = _context.TaiKhoans.SingleOrDefault(p => p.TenDangNhap == taiKhoan.TenDangNhap);
-            if (tk == null)
+            TaiKhoan username = _context.TaiKhoans.SingleOrDefault(p => p.TenDangNhap == taiKhoan.TenDangNhap);
+            //TaiKhoan password = _context.TaiKhoans.SingleOrDefault(p => p.MatKhau == taiKhoan.MatKhau);
+            if (username != null)
+            {
+                ViewBag.UsernameErr = "Username này đã tồn tại";
+            }
+            //if (password != null)
+            //{
+            //    ViewBag.PasswordErr = "Mật khẩu này đã tồn tại";
+            //}
+            if (ViewBag.UsernameErr == null /*&& ViewBag.PasswordErr == null*/)
             {
                 if (ModelState.IsValid)
                 {
@@ -72,11 +81,6 @@ namespace WebBanHang.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-            }
-            else
-            {
-                ViewBag.UsernameErr = "Username này đã tồn tại";
-                return View(taiKhoan);
             }
             return View(taiKhoan);
         }
