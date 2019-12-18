@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
@@ -29,10 +30,22 @@ namespace WebBanHang.Controllers
 
         public IActionResult Profile()
         {
-            return View();
+            if (User.Identity.Name =="admin")
+            {
+                return View();
+            }
+            else return RedirectToAction("Index", "TrangChus");
         }
 
-       
+        public IActionResult CheckAdmin(string TenDangNhap)
+        {
+            if (TenDangNhap == "admin")
+            {
+                return Json("không được đăng ký tên admin");
+            }
+            else return Json(true);
+        }
+
 
 
         [HttpGet, AllowAnonymous]
@@ -44,6 +57,10 @@ namespace WebBanHang.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Taikhoan()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View(await _context.TaiKhoans.ToListAsync());
         }
         [HttpPost, AllowAnonymous]
@@ -61,13 +78,15 @@ namespace WebBanHang.Controllers
             }
             
             //ghi nhận đăng nhập thành công
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name,kh.TenDangNhap) };
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name,kh.TenDangNhap)
+            };
             // create identity
             ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
             ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
             await HttpContext.SignInAsync(principal);
             //Gán session
             HttpContext.Session.SetString("MaTK", kh.MaTK);
+            
             //Lấy lại trang yêu cầu (nếu có)
             if (Url.IsLocalUrl(urlReturn))
             {

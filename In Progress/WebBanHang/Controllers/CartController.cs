@@ -22,6 +22,17 @@ namespace WebBanHang.Controllers
         {
             _context = context;
         }
+        [Route("showsp")]
+        public async Task<IActionResult> Showsp(int? id)
+        {
+            var model = _context.loais.ToList();
+            ViewBag.model = model;
+
+            var loai = _context.HangHoas
+                .Where(m => m.MaLoai == id).AsNoTracking().OrderBy(p => p.TenHH);
+
+            return View(loai);
+        }
         [Route("index")]
         public async Task<IActionResult> Index()
         {
@@ -35,7 +46,7 @@ namespace WebBanHang.Controllers
             }
             else
             ViewBag.cart = cart;
-            ViewBag.gia = cart.Sum(item => item.Product.DonGia);
+            ViewBag.gia = cart.Sum(item => (item.Product.DonGia * item.Quantity));
             ViewBag.giamgia = cart.Sum(x => (x.Product.GiamGia*x.Product.DonGia)/100);
             ViewBag.total = cart.Sum(item => (item.Product.DonGia * item.Quantity)-((item.Product.GiamGia)*(item.Product.DonGia))/100);
             ViewBag.quantity = cart.Sum(item => item.Quantity);
@@ -91,6 +102,35 @@ namespace WebBanHang.Controllers
                 else
                 {
                     cart.Add(new Item { Product = _context.HangHoas.Find(id), Quantity = 1 });
+                }
+                SessionHelper.Set(HttpContext.Session, "cart", cart);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [Route("buydetail/{id}")]
+        public IActionResult BuyDetail(int id, int soluong)
+        {
+
+            if (SessionHelper.Get<List<Item>>(HttpContext.Session, "cart") == null)
+            {
+                List<Item> cart = new List<Item>();
+                cart.Add(new Item { Product = _context.HangHoas.Find(id), Quantity = soluong });
+
+                SessionHelper.Set(HttpContext.Session, "cart", cart);
+            }
+            else
+            {
+                List<Item> cart = SessionHelper.Get<List<Item>>(HttpContext.Session, "cart");
+                int index = Exists(id);
+                if (index != -1)
+                {
+                    cart[index].Quantity = cart[index].Quantity + soluong;
+                }
+                else
+                {
+                    cart.Add(new Item { Product = _context.HangHoas.Find(id), Quantity = soluong });
                 }
                 SessionHelper.Set(HttpContext.Session, "cart", cart);
             }
@@ -255,5 +295,6 @@ namespace WebBanHang.Controllers
         {
             return View(await _context.loais.ToListAsync());
         }
+
     }
 }

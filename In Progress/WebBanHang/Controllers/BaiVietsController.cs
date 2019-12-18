@@ -21,6 +21,10 @@ namespace WebBanHang.Controllers
         // GET: BaiViets
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View(await _context.BaiViet.ToListAsync());
         }
 
@@ -45,6 +49,10 @@ namespace WebBanHang.Controllers
         // GET: BaiViets/Create
         public IActionResult Create()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             ViewData["MaLoai"] = new SelectList(_context.loais, "MaLoai", "TenLoai");
             return View();
         }

@@ -23,6 +23,10 @@ namespace WebBanHang.Controllers
         // GET: Loais
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View(await _context.loais.ToListAsync());
         }
 
@@ -47,6 +51,10 @@ namespace WebBanHang.Controllers
         // GET: Loais/Create
         public IActionResult Create()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View();
         }
 

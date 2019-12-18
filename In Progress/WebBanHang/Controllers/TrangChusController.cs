@@ -243,6 +243,8 @@ namespace WebBanHang.Controllers
         [HttpGet, AllowAnonymous]
         public IActionResult Login()
         {
+            var model = _context.loais.ToList();
+            ViewBag.model = model;
             ViewBag.ReturnUrl = HttpContext.Request.Query["ReturnUrl"].ToString();
             return View();
         }
@@ -291,6 +293,8 @@ namespace WebBanHang.Controllers
         }
         public IActionResult Create()
         {
+            var model = _context.loais.ToList();
+            ViewBag.model = model;
             return View();
         }
 
@@ -301,11 +305,20 @@ namespace WebBanHang.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaTK,TenDangNhap,MatKhau")] TaiKhoan taiKhoan)
         {
-            if (ModelState.IsValid)
+            TaiKhoan username = _context.TaiKhoans.SingleOrDefault(p => p.TenDangNhap == taiKhoan.TenDangNhap);
+            if (username != null)
             {
-                _context.Add(taiKhoan);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.UsernameErr = "Username này đã tồn tại";
+            }
+
+            if (ViewBag.UsernameErr == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(taiKhoan);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(taiKhoan);
         }

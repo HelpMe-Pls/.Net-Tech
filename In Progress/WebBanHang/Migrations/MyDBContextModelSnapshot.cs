@@ -105,7 +105,7 @@ namespace WebBanHang.Migrations
                     b.ToTable("Loai");
                 });
 
-            modelBuilder.Entity("WebBanHang.Models.Order", b =>
+            modelBuilder.Entity("WebBanHang.Models.Oder", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -127,7 +127,7 @@ namespace WebBanHang.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Order");
+                    b.ToTable("Oder");
                 });
 
             modelBuilder.Entity("WebBanHang.Models.OderDetail", b =>
@@ -190,7 +190,7 @@ namespace WebBanHang.Migrations
 
             modelBuilder.Entity("WebBanHang.Models.OderDetail", b =>
                 {
-                    b.HasOne("WebBanHang.Models.Order", "oder")
+                    b.HasOne("WebBanHang.Models.Oder", "oder")
                         .WithMany()
                         .HasForeignKey("OderID")
                         .OnDelete(DeleteBehavior.Cascade);

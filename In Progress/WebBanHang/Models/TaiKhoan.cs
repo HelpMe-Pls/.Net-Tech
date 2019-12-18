@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,6 +17,7 @@ namespace WebBanHang.Models
 
             public string MaTK { get; set; }
           
+            
             public string TenDangNhap { get; set; }
         [DataType(DataType.Password)]
         public string MatKhau { get; set; }

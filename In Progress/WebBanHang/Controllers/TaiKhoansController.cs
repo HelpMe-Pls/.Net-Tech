@@ -21,6 +21,10 @@ namespace WebBanHang.Controllers
         // GET: TaiKhoans
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View(await _context.TaiKhoans.ToListAsync());
         }
 
@@ -45,6 +49,10 @@ namespace WebBanHang.Controllers
         // GET: TaiKhoans/Create
         public IActionResult Create()
         {
+            if (User.Identity.Name != "admin")
+            {
+                return RedirectToAction("Index", "TrangChus");
+            }
             return View();
         }
 
@@ -55,11 +63,20 @@ namespace WebBanHang.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaTK,TenDangNhap,MatKhau")] TaiKhoan taiKhoan)
         {
-            if (ModelState.IsValid)
+            TaiKhoan username = _context.TaiKhoans.SingleOrDefault(p => p.TenDangNhap == taiKhoan.TenDangNhap);
+            if (username != null)
             {
-                _context.Add(taiKhoan);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.UsernameErr = "Username này đã tồn tại";
+            }
+
+            if (ViewBag.UsernameErr == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(taiKhoan);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(taiKhoan);
         }
