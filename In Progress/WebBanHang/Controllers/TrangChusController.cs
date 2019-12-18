@@ -301,11 +301,20 @@ namespace WebBanHang.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaTK,TenDangNhap,MatKhau")] TaiKhoan taiKhoan)
         {
-            if (ModelState.IsValid)
+            TaiKhoan tk = _context.TaiKhoans.SingleOrDefault(p => p.TenDangNhap == taiKhoan.TenDangNhap);
+            if (tk == null)
             {
-                _context.Add(taiKhoan);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(taiKhoan);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            else
+            {
+                ViewBag.UsernameErr = "Username này đã tồn tại";
+                return View(taiKhoan);
             }
             return View(taiKhoan);
         }
