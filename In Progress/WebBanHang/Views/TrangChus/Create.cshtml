@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label asp-for="MatKhau" class="control-label"></label>
                         <input asp-for="MatKhau" class="form-control" required/>
-                        <span asp-validation-for="MatKhau" class="text-danger"></span>
+                        <span asp-validation-for="MatKhau" class="text-danger">@ViewBag.PasswordErr</span>
                     </div>
                     <button type="submit" class="btn btn-1" name="login" id="login">Sign Up</button>
                 </form>
