@@ -64,16 +64,16 @@ namespace WebBanHang.Controllers
         public async Task<IActionResult> Create([Bind("MaTK,TenDangNhap,MatKhau")] TaiKhoan taiKhoan)
         {
             TaiKhoan username = _context.TaiKhoans.SingleOrDefault(p => p.TenDangNhap == taiKhoan.TenDangNhap);
-            //TaiKhoan password = _context.TaiKhoans.SingleOrDefault(p => p.MatKhau == taiKhoan.MatKhau);
+            TaiKhoan password = _context.TaiKhoans.SingleOrDefault(p => p.MatKhau == taiKhoan.MatKhau);
             if (username != null)
             {
                 ViewBag.UsernameErr = "Username này đã tồn tại";
             }
-            //if (password != null)
-            //{
-            //    ViewBag.PasswordErr = "Mật khẩu này đã tồn tại";
-            //}
-            if (ViewBag.UsernameErr == null /*&& ViewBag.PasswordErr == null*/)
+            if (password != null)
+            {
+                ViewBag.PasswordErr = "Mật khẩu này đã tồn tại";
+            }
+            if (ViewBag.UsernameErr == null && ViewBag.PasswordErr == null)
             {
                 if (ModelState.IsValid)
                 {
