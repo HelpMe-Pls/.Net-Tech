@@ -17,7 +17,7 @@ namespace WebBanHang.Models
 
             public string MaTK { get; set; }
           
-            [Remote(action:"CheckAdmin",controller:"Admin")]
+            
             public string TenDangNhap { get; set; }
         [DataType(DataType.Password)]
         public string MatKhau { get; set; }
