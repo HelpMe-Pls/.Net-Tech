@@ -252,6 +252,9 @@ namespace WebBanHang.Controllers
         [HttpPost, Authorize]
         public IActionResult ThanhToan(string shipName, int mobile, string address, string email)
         {
+            var model = _context.loais.ToList();
+            ViewBag.model = model;
+
             var oder = new Oder();
             oder.CreatedDate = DateTime.Now;
             oder.ShipName = shipName;
@@ -288,7 +291,7 @@ namespace WebBanHang.Controllers
                 Console.Write(e);
             }
             SessionHelper.Set(HttpContext.Session, "cart", "");
-            return View("HoanThanh");
+            return View("HoanThanh",ViewBag.model);
 
         }
         public async Task< IActionResult> xemdonhang()
