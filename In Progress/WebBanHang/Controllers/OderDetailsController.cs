@@ -39,7 +39,7 @@ namespace WebBanHang.Controllers
             }
 
             var oderDetail = await _context.OderDetails
-                .FirstOrDefaultAsync(m => m.OderID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (oderDetail == null)
             {
                 return NotFound();
@@ -97,7 +97,7 @@ namespace WebBanHang.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("OderID,Quantity,Gia,MaHH")] OderDetail oderDetail)
         {
-            if (id != oderDetail.OderID)
+            if (id != oderDetail.ID)
             {
                 return NotFound();
             }

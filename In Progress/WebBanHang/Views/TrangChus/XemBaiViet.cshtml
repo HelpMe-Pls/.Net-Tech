@@ -11,7 +11,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <ul class="breadcrumb">
-                   
+                    <li><a asp-action="Index">Trang chủ</a></li>
+                    <li><a asp-action="showbaiviet">Tin tức</a></li>
+                    <li><a href="#">Xem bài viết</a></li>
                 </ul>
             </div>
         </div>
@@ -19,21 +21,22 @@
             <div id="main-content" class="col-md-8">
                 <div class="product">
                     <div class="col-md-6">
-                        <ul>
-                            <li><img src="@Html.DisplayFor(modelItem => Model.Hinh)"></li>
-                        </ul>
+
                     </div>
                     <div class="col-md-6">
                         <div class="caption">
+                            <div class="image">
+                                <img src="~/Hinh/@Html.DisplayFor(modelItem => Model.Hinh)">
+                            </div>
                             <div class="name"><h3>@Html.DisplayFor(modelItem => Model.TieuDe)</h3></div>
                             <div class="info">
                                 <ul>
-                                    
+
                                     <li> @Html.DisplayFor(modelItem => Model.NoiDung)</li>
                                 </ul>
                             </div>
-                          
-                           
+
+
                             <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
                             <div class="share well">
                                 <strong style="margin-right: 13px;">Share :</strong>

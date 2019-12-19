@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -62,8 +64,19 @@ namespace WebBanHang.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,TieuDe,NoiDung,Hinh,MaLoai")] BaiViet baiViet)
+        public async Task<IActionResult> Create([Bind("ID,TieuDe,NoiDung,Hinh,MaLoai")] BaiViet baiViet, IFormFile fHinh)
         {
+            if (fHinh != null)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(),
+                @"wwwroot\Hinh", fHinh.FileName);
+                using (var file = new FileStream(path, FileMode.Create))
+                {
+                    await fHinh.CopyToAsync(file);
+                }
+                baiViet.Hinh = fHinh.FileName;
+
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(baiViet);
@@ -94,11 +107,23 @@ namespace WebBanHang.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,TieuDe,NoiDung,Hinh,MaLoai")] BaiViet baiViet)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,TieuDe,NoiDung,Hinh,MaLoai")] BaiViet baiViet, IFormFile fHinh)
         {
             if (id != baiViet.ID)
             {
                 return NotFound();
+            }
+
+            if (fHinh != null)
+            {
+                //upload file
+                var path = Path.Combine(Directory.GetCurrentDirectory(),
+               @"wwwroot\Hinh", fHinh.FileName);
+                using (var file = new FileStream(path, FileMode.Create))
+                {
+                    await fHinh.CopyToAsync(file);
+                }
+                baiViet.Hinh = fHinh.FileName;
             }
 
             if (ModelState.IsValid)
