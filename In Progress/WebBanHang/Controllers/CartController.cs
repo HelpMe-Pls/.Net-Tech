@@ -53,33 +53,6 @@ namespace WebBanHang.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> Details(int? id, int? id2, int page = 1)
-        //{
-        //    var model = _context.loais.ToList();
-        //    ViewBag.model = model;
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var loai = await _context.HangHoas
-        //        .FirstOrDefaultAsync(m => m.MaHH == id);
-        //    var loai2 = _context.HangHoas
-        //       .Where(m => m.MaLoai == id2).AsNoTracking().OrderByDescending(p => p.NgayDang);
-
-        //    ViewBag.loai2 = loai2;
-        //    var loai3 = _context.HangHoas
-        //       .Where(m => m.MaLoai == id2).AsNoTracking().OrderBy(p => p.NgayDang);
-
-        //    ViewBag.loai3 = loai3;
-        //    if (loai == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(loai);
-        //}
-
         [Route("buy/{id}")]
         public IActionResult Buy(int id,int soluong)
         {
@@ -161,25 +134,7 @@ namespace WebBanHang.Controllers
             return -1;
         }
 
-        //public jsonresult update(string cartmodel)
-        //{
-        //    var jsoncart = jsonconvert.deserializeobject<list<item>>(cartmodel);
-        //    var sessioncart = sessionhelper.get<list<item>>(httpcontext.session, "cart");
-        //    foreach (var item in sessioncart)
-        //    {
-        //        var jsonitem = jsoncart.where(x => x.product.mahh == item.product.mahh).first();
-        //        if (jsonitem != null)
-        //        {
-        //          item.quantity = jsonitem.quantity;
-        //        }
-
-        //    }
-        //    sessionhelper.set(httpcontext.session, "cart", sessioncart);
-        //    return json(new
-        //    {
-        //        status = true
-        //   });
-        //}
+       
         [HttpPost("a")]
         public IActionResult Update(IFormCollection fc)
         {
@@ -234,7 +189,7 @@ namespace WebBanHang.Controllers
             }
 
         }
-        [HttpGet, Authorize]
+        [HttpGet/*, Authorize*/]
         public IActionResult ThanhToan()
         {
             var model = _context.loais.ToList();
@@ -249,7 +204,7 @@ namespace WebBanHang.Controllers
             ViewBag.total = cart.Sum(item => item.Product.DonGia * item.Quantity);
             return View();
         }
-        [HttpPost, Authorize]
+        [HttpPost/*, Authorize*/]
         public IActionResult ThanhToan(string shipName, int mobile, string address, string email)
         {
             var model = _context.loais.ToList();
