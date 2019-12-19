@@ -134,7 +134,7 @@ namespace WebBanHang.Controllers
             }
 
             var oderDetail = await _context.OderDetails
-                .FirstOrDefaultAsync(m => m.OderID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (oderDetail == null)
             {
                 return NotFound();
