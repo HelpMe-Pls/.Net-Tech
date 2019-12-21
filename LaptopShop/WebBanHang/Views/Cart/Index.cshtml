@@ -29,7 +29,7 @@
                                         </ul>
                                     </div>
                                     <div class="price">@item.Product.DonGia đ<span>@item.Product.GiamGia%</span></div>
-                                    <label>Số lượng: </label> <input name="quantity" class="form-inline quantity" type="text" value="@item.Quantity" asp-route-id="@item.Product.MaHH">
+                                    <label>Số lượng: </label> <input name="quantity" class="form-inline quantity" type="number" value="@item.Quantity" asp-route-id="@item.Product.MaHH">
                                     <hr>
                                     <a asp-action="remove" asp-controller="cart" asp-route-id="@item.Product.MaHH" class="btn btn-default pull-right">Bỏ</a>
                                 </div>
